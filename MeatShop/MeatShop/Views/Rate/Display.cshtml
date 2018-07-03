@@ -1,0 +1,59 @@
+﻿@model MeatShop.ViewModels.RatesAndRatesList
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">Rates</div>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            @{
+
+                <tr>
+                    <th>Meat Type</th>
+                    <th>With-Bone Cost</th>
+                    <th>Boneless Cost</th>
+                </tr>
+                foreach (var meat_type in Model.Rates_List)
+                {
+                    <tr>
+                        <td>@meat_type.MeatType.Name</td>
+                        <td>@meat_type.BoneCost</td>
+                        <td>@meat_type.BonelessCost</td>
+                    </tr>
+                }
+            }
+        </thead>
+    </table>
+</div>
+
+
+@using (Html.BeginForm("Update", "Rate"))
+{
+    <h4>Update Rates</h4>
+    <div class="form-group">
+        @Html.LabelFor(r => r.MeatType.Name)
+        @Html.DropDownListFor(r => r.MeatType.Id, new SelectList(Model.MeatType_List, "Id", "Name"), "Select Meat Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.MeatType.Id)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Rates.BoneCost)
+        @Html.TextBoxFor(r => r.Rates.BoneCost, new { @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.Rates.BoneCost)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Rates.BonelessCost)
+        @Html.TextBoxFor(r => r.Rates.BonelessCost, new { @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.Rates.BonelessCost)
+    </div>
+
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Update</button>
+}

@@ -1,0 +1,45 @@
+﻿@model MeatShop.ViewModels.MeatTypesListViewModel
+@{
+    /**/
+
+    ViewBag.Title = "AddMeatType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">Rates</div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            @{
+                <tr>
+                    <th>Meat Type</th>
+                </tr>
+                foreach (var meat_type in Model.MeatTypesList)
+                {
+                    <tr>
+                        <td>@meat_type.Name</td>
+                        <td>@Html.ActionLink("Delete", "Delete", new { id = meat_type.Id }) &nbsp;
+                        @Html.ActionLink("Edit", "Edit", new { id = meat_type.Id })</td>
+                    </tr>
+                }
+            }
+        </thead>
+    </table>
+</div>
+
+<h4>Add Meat Type</h4>
+
+@using (Html.BeginForm("Add", "MeatType", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(r => r.MeatType.Name)
+        @Html.TextBoxFor(r => r.MeatType.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(r => r.MeatType.Name)
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Add</button>
+    @Html.AntiForgeryToken()
+}

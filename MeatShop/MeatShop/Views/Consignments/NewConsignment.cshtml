@@ -1,0 +1,37 @@
+﻿@model MeatShop.ViewModels.ConsignmentViewModel
+@{
+    ViewBag.Title = "NewConsignment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>NewConsignment</h4>
+
+@using (Html.BeginForm("Update", "Consignments"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consignment.VendorId)
+        @Html.DropDownListFor(m => m.Consignment.VendorId, new SelectList(Model.Vendor_List, "Id", "Name"), "Select Vendor", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Consignment.VendorId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consignment.MeatTypeId)
+        @Html.DropDownListFor(m => m.Consignment.MeatTypeId, new SelectList(Model.MeatType_List, "Id", "Name"), "Select Meat Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Consignment.MeatTypeId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consignment.Quantity)
+        @Html.TextBoxFor(m => m.Consignment.Quantity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Consignment.Quantity)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consignment.AmountGiven)
+        @Html.TextBoxFor(m => m.Consignment.AmountGiven, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Consignment.AmountGiven)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+}
+

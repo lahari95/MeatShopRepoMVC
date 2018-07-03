@@ -1,0 +1,74 @@
+﻿@model MeatShop.ViewModels.ConsignmentViewModel
+@{
+    ViewBag.Title = "DatedConsignments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>DatedConsignments</h4>
+
+@using (Html.BeginForm("Submit", "Consignments"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.FromDate)
+        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FromDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ToDate)
+        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consignment.VendorId)
+        @Html.DropDownListFor(m => m.Consignment.VendorId, new SelectList(Model.Vendor_List, "Id", "Name"), "Select Meat Type", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consignment.MeatTypeId)
+        @Html.DropDownListFor(m => m.Consignment.MeatTypeId, new SelectList(Model.MeatType_List, "Id", "Name"), "Select Meat Type", new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Total)
+    @Html.TextBoxFor(m => m.Total, new { @class = "form-control" })
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Consignments</div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            @{
+                <tr>
+                    <th>Consignment Id</th>
+                    <th>Date</th>
+                    <th>Vendor Name</th>
+                    <th>Meat Type</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+
+
+                foreach (var consignment in Model.Consignment_List)
+                {
+
+                    <tr>
+                        <td>@consignment.Id</td>
+                        <td>@consignment.DateTime</td>
+                        <td>@consignment.Vendor.Name</td>
+                        <td>@consignment.MeatType.Name</td>
+                        <td>@consignment.Quantity</td>
+                        <td>@consignment.AmountGiven</td>
+
+                    </tr>
+
+                }
+            }
+        </thead>
+    </table>
+</div>
+
+

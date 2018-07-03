@@ -1,0 +1,30 @@
+﻿@model MeatShop.ViewModels.InventoryViewModel
+@{
+    ViewBag.Title = "AddingToInHouseInventory";
+}
+
+<h4>AddingToInventory</h4>
+
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">Inventory</div>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            @{
+                <tr>
+                    <th>Meat Type</th>
+                    <th>Quantity Available</th>
+                </tr>
+                foreach (var meat_type in Model.Inventory_List)
+                {
+                    <tr>
+                        <td>@meat_type.MeatType.Name</td>
+                        <td>@meat_type.Quantity</td>
+                    </tr>
+                }
+            }
+        </thead>
+    </table>
+</div>

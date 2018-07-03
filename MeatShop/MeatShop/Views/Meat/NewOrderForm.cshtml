@@ -1,0 +1,87 @@
+﻿@model MeatShop.ViewModels.MeatType_Rates_ViewModel
+@{
+    ViewBag.Title = "NewOrderForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>New Order</h4>
+
+@using (Html.BeginForm("TotalCost", "Meat"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.MeatType.Name)
+        @Html.DropDownListFor(m => m.MeatType.Id, new SelectList(Model.MeatType_List, "Id", "Name"), "Select Meat Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.MeatType.Id)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Meat.Quantity)
+        @Html.TextBoxFor(m => m.Meat.Quantity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Meat.Quantity)
+        @Html.ValidationMessage("inHouseInventoryList.Quantity")
+    </div>
+
+    <div class="form-group">
+        @Html.RadioButtonFor(m => m.Meat._IsBoneless, true) Boneless
+        @Html.RadioButtonFor(m => m.Meat._IsBoneless, false) Bone
+    </div>
+
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">TotalCost</button>
+
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Total)
+    @Html.TextBoxFor(m => m.Total, new { @class = "form-control" })
+</div>
+
+
+
+
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">Inventory</div>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            @{
+                <tr>
+                    <th>Meat Type</th>
+                    <th>Quantity Available</th>
+                </tr>
+                foreach (var meat_type in Model.InHouseInventory_List)
+                {
+                    <tr>
+                        <td>@meat_type.MeatType.Name</td>
+                        <td>@meat_type.Quantity</td>
+                    </tr>
+                }
+            }
+        </thead>
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Rates</div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            @{
+                <tr>
+                    <th>Meat Type</th>
+                    <th>With-Bone Cost</th>
+                    <th>Boneless Cost</th>
+                </tr>
+                foreach (var meat_type in Model.Rates_List)
+                {
+                    <tr>
+                        <td>@meat_type.MeatType.Name</td>
+                        <td>@meat_type.BoneCost</td>
+                        <td>@meat_type.BonelessCost</td>
+                    </tr>
+                }
+            }
+        </thead>
+    </table>
+</div>

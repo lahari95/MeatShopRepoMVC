@@ -1,0 +1,77 @@
+﻿@model MeatShop.ViewModels.VendorListViewModel
+@{
+    ViewBag.Title = "NewVendor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="panel panel-default">
+    
+    <div class="panel-heading">Vendor Details</div>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            @{
+                <tr>
+                    <th>Vendor Id</th>
+                    <th>Vendor Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Date Added</th>
+                </tr>
+
+
+                foreach (var vendor in Model.Vendor_List)
+                {
+                    <tr>
+                        <td>@vendor.Id</td>
+                        <td>@vendor.Name</td>
+                        <td>@vendor.Address</td>
+                        <td>@vendor.Email</td>
+                        <td>@vendor.Phone</td>
+                        <td>@vendor.DateAdded</td>
+                        <td>@Html.ActionLink("Delete", "Delete", new { id = vendor.Id }) &nbsp;
+                        @Html.ActionLink("Edit", "Edit", new { id = vendor.Id })</td>
+                    </tr>
+                }
+            }
+        </thead>
+    </table>
+</div>
+
+
+
+    <h4>New Vendor</h4>
+
+    @using (Html.BeginForm("Add", "Vendors"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Vendor.Name)
+            @Html.TextBoxFor(m => m.Vendor.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Vendor.Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Vendor.Address)
+            @Html.TextBoxFor(m => m.Vendor.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Vendor.Address)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Vendor.Phone)
+            @Html.TextBoxFor(m => m.Vendor.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Vendor.Phone)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Vendor.Email)
+            
+            @Html.TextBoxFor(m => m.Vendor.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Vendor.Email)
+        </div>
+
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Add</button>
+    }
+

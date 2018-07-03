@@ -1,0 +1,9 @@
+﻿@model MeatShop.ViewModels.MeatType_Rates_ViewModel
+@{
+    ViewBag.Title = "TotalCost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<h4>TotalCost:@Model.Meat.Total</h4>
+
