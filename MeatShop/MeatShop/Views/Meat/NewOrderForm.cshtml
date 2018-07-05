@@ -37,51 +37,58 @@
 </div>
 
 
-
-
 <br />
-<div class="panel panel-default">
+<html>
+<body>
+    <div class="panel panel-default">
 
-    <div class="panel-heading">Inventory</div>
+        <div class="panel-heading">Inventory</div>
 
-    <table class="table table-bordered table-hover">
-        <thead>
+        <table class="table table-bordered table-hover">
+
             @{
-                <tr>
-                    <th>Meat Type</th>
-                    <th>Quantity Available</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Meat Type</th>
+                        <th>Quantity Available</th>
+                    </tr>
+                </thead>
                 foreach (var meat_type in Model.InHouseInventory_List)
                 {
-                    <tr>
+                    <tr class="meatRows">
                         <td>@meat_type.MeatType.Name</td>
                         <td>@meat_type.Quantity</td>
                     </tr>
                 }
             }
-        </thead>
-    </table>
-</div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Rates</div>
-    <table class="table table-bordered table-hover">
-        <thead>
-            @{
-                <tr>
-                    <th>Meat Type</th>
-                    <th>With-Bone Cost</th>
-                    <th>Boneless Cost</th>
-                </tr>
-                foreach (var meat_type in Model.Rates_List)
-                {
+        </table>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Rates</div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                @{
                     <tr>
-                        <td>@meat_type.MeatType.Name</td>
-                        <td>@meat_type.BoneCost</td>
-                        <td>@meat_type.BonelessCost</td>
+                        <th>Meat Type</th>
+                        <th>With-Bone Cost</th>
+                        <th>Boneless Cost</th>
                     </tr>
+                    foreach (var meat_type in Model.Rates_List)
+                    {
+                        <tr>
+                            <td>@meat_type.MeatType.Name</td>
+                            <td>@meat_type.BoneCost</td>
+                            <td>@meat_type.BonelessCost</td>
+                        </tr>
+                    }
                 }
-            }
-        </thead>
-    </table>
-</div>
+            </thead>
+        </table>
+    </div>
+    <script src="~/Scripts/BoldingMeatTypeLessThan20lbs.js">
+
+    </script>
+</body>
+</html>

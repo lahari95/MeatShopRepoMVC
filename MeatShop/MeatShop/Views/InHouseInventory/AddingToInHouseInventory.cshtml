@@ -6,25 +6,35 @@
 <h4>AddingToInventory</h4>
 
 <br />
-<div class="panel panel-default">
+<html>
+<body>
+    <div class="panel panel-default">
 
-    <div class="panel-heading">Inventory</div>
+        <div class="panel-heading">Inventory</div>
 
-    <table class="table table-bordered table-hover">
-        <thead>
+        <table class="table table-bordered table-hover">
+
             @{
-                <tr>
-                    <th>Meat Type</th>
-                    <th>Quantity Available</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Meat Type</th>
+                        <th>Quantity Available</th>
+                    </tr>
+                </thead>
+
                 foreach (var meat_type in Model.Inventory_List)
                 {
-                    <tr>
+                    <tr class="meatRows">
                         <td>@meat_type.MeatType.Name</td>
                         <td>@meat_type.Quantity</td>
                     </tr>
                 }
             }
-        </thead>
-    </table>
-</div>
+
+        </table>
+    </div>
+    <script src="~/Scripts/BoldingMeatTypeLessThan20lbs.js">
+
+    </script>
+</body>
+</html>
